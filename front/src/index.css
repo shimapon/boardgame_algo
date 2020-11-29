@@ -1,0 +1,134 @@
+.blackcard {
+  background-color: black;
+}
+
+.blackcard-text {
+  color:white;
+}
+
+.whitecard {
+  background-color: white;
+}
+
+.whitecard-text {
+  color: black;
+}
+
+.myarea div{
+  height: 240px;
+  width: 180px;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;/*角の丸み*/
+  float: left;
+}
+
+.myarea div:hover {
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.25);
+  transform: translateY(-1em);
+}
+
+.myarea p {
+  font-size: 40px;
+}
+
+.game .myarea {
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+}
+
+/* MyArea */
+
+.deckblackcard,.deckwhitecard{
+  height: 120px;
+  width: 90px;
+  border-radius: 8px;/*角の丸み*/
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.deckwhitecard{
+  background-color: white;
+}
+
+.deckblackcard{
+  background-color: black;
+}
+
+.oppoplayer .hand div{
+  height: 120px;
+  width: 90px;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 8px;/*角の丸み*/
+  float: left;
+}
+
+.leftplayer .hand div,.rightplayer .hand div{
+  height: 90px;
+  width: 120px;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 8px;/*角の丸み*/
+}
+
+.rightplayer p{
+  transform: rotate(270deg);
+}
+
+.leftplayer p{
+  writing-mode: vertical-lr;
+}
+.oppoplayer,.leftplayer,.rightplayer{
+  display: flex;
+  justify-content: center;
+}
+
+.deck{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.oppoplayer p{
+  transform: rotate(180deg);
+}
+
+.hand {
+  column-gap: 10px;
+}
+
+.hand p {
+  font-size: 24px;
+}
+
+.hand div{
+  margin: 0.1em;
+}
+
+.wrapper{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+}
+
+.game {
+  display: grid;
+}
+
+.board{
+  display: grid;
+}
