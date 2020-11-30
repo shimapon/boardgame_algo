@@ -24,7 +24,7 @@ $cards=[[0,false],[1,false],[2,false],[3,false],[4,false],[5,false],
   def subscribed
     stream_from "room_channel"
     logger.info 'room:接続した'
-    first_regis()
+    #first_regis()
   end
 
   def unsubscribed
@@ -51,7 +51,7 @@ $cards=[[0,false],[1,false],[2,false],[3,false],[4,false],[5,false],
   end
 
   # ゲーム中はフロントからのメッセージをそのまま送る，横流し
-  def first_regis()
+  def first_regis(data)
     card = $cards.shuffle
     tmp_card=[]
     tmp_card.push(card.pop)

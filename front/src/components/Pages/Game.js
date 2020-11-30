@@ -17,16 +17,21 @@ class Game extends React.Component {
     super(props)
     this.handleReceived = this.handleReceived.bind(this);
     this.state = {
-      cards:[[0,true],[0,false],[2,false],[6,true],[10,true]],
-      rightplayercards:[[0,true,false],[0,false,false],[2,false,false],[4,false,false]],
-      oppoplayercards:[[0,true,true],[0,false,false],[2,false,true],[8,true,false]],
-      leftplayercards:[[0,true,true],[0,false,true],[2,false,false],[3,true,false]],
+      cards:[],
+      rightplayercards:[[0,true,false],[0,false,false],[2,false,false]],
+      oppoplayercards:[[0,true,true],[2,false,true],[8,true,false]],
+      leftplayercards:[[0,true,true],[0,false,true],[3,true,false]],
       deck:[[1,true],[1,false]],
     }
   }
 
   // Component が Mount された後に実行されるメソッド
   componentDidMount() {
+    // 1.5秒後，サーバにメッセージを送り，手札を取得する
+    setTimeout(() => {
+      let message = ["hoge"]
+      this.refs.roomChannel.perform('first_regis', {message}) 
+    }, 1500)
   }
 
   handleConnected() {
@@ -37,12 +42,53 @@ class Game extends React.Component {
     console.log("Game:message来た: ");
     console.log(message);
 
+    let scards=this.state.cards
+    let deck = this.state.deck
+    let rcards=this.state.rightplayercards
+    let lcards=this.state.leftplayercards
+    let ocards=this.state.oppoplayercards
     let pcards=[]
     let cards=[]
+    let card
+    let user
+    let index
 
     /* 命令ごとの処理 */
     // 山札から引いた
     if (message[0]===0){
+      user=message[1]
+      card=message[2]
+
+      // 該当のカードを手札から削除
+      deck.shift()
+
+
+      if (user===myindex){
+        this.setState({
+          cards:into_cards(scards,card),
+          deck:deck,
+        })
+      }
+      else if(user=== myindex-1){
+        this.setState({
+          leftplayercards:into_cards(lcards,card),
+          deck:deck,
+        })
+      }
+      else if(user=== myindex+1){
+        this.setState({
+          rightplayercards:into_cards(rcards,card),
+          deck:deck,
+        })
+      }
+      else if(user=== myindex+2){
+        this.setState({
+          oppoplayercards:into_cards(ocards,card),
+          deck:deck,
+        })
+      }
+
+
 
     }
     // 手札めくった
@@ -110,7 +156,7 @@ class Game extends React.Component {
 
   // 手札クリック時
   handleHandClick(i) {
-    let message = [1, myindex, this.state.cards[0]]
+    let message = [1, myindex, this.state.cards[i]]
     this.refs.roomChannel.perform('handle_click', {message}) 
   }
 
@@ -168,6 +214,29 @@ class Game extends React.Component {
       </div>
     );
   }
+}
+
+function into_cards(cards,card){
+  console.log(card);//0 0 10
+  console.log(cards);//8
+
+
+  var into_i=0
+  for(var i=0;i<cards.length;i++){
+
+    if(cards[i][0]<card[0]) into_i=i+1
+    else if(cards[i][0]===card[0]){
+      if(!cards[i][1]) into_i=i+1
+    }
+    else break
+
+    console.log(into_i);
+  }
+
+  cards.splice(into_i, 0, card); // into_i番目に挿入
+
+  return cards
+
 }
   
 export default Game
