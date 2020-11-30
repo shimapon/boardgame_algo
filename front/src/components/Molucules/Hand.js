@@ -5,22 +5,24 @@ import Card from './Card';
 // Hand molecules
 class Hand extends React.Component {
   renderHand(data,i) {
+    var classNamediv;
+    var classNametext;
     if(data[1]){
-      var classNamediv="whitecard"
+      classNamediv="whitecard"
       if(data[2]){
-        var classNametext="whitecard-text"
+        classNametext="whitecard-text"
       }
       else{
-        var classNametext="blackcard-text"
+        classNametext="blackcard-text"
       }
     }
     else{
-      var classNamediv="blackcard"
+      classNamediv="blackcard"
       if(data[2]){
-        var classNametext="blackcard-text"
+        classNametext="blackcard-text"
       }
       else{
-        var classNametext="whitecard-text"
+        classNametext="whitecard-text"
       }
     }
 
